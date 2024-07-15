@@ -6,8 +6,11 @@ Requires requets library to work.
 
 
 TODO:
+
 Fix minioncrafts.txt file
+
 Create website
+
 Optimize code
 
 
