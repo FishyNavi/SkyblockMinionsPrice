@@ -15,6 +15,7 @@ items=[]
 buyprices=[]
 sellprices=[]
 t={}
+minions={}
 
 
 ######Requests#######
@@ -39,6 +40,7 @@ for i in BazaarData["products"]:
 
 for i in SbItemsData.get('items'):
     t[i.get("name")]=i.get("id")
+    
 
 
 #Converting lists into dictionary
@@ -50,19 +52,28 @@ for i in range(len(buyprices)):
 
 
 #Calculating all minions price and printing them
-
 for i in minioncraft:
-    cost=0        
     try:
+
+        cost=0            
         x1=itemtotal.get(t.get(i[3]))[0]
         x2=int(i[2])
-        cost=round(x1*x2)
-        
-        
-       
-        print(f'{i[0]} {i[1]} for {i[2]} {i[3]}   {cost} coins in total ({round(itemtotal.get(t.get(i[3]))[0])}*{round(int(i[2]))})')
-        
-    except:
-        print("Nope!(Bug here)")
+        cost=round(x1*x2)   
 
+        if i[0] not in minions:
+
+            minions.update({i[0]:[{i[1]:(i[2],i[3])}]}) 
+
+        else:         
+
+            minions[i[0]].append({i[1]:(i[2],i[3])}) 
+            
+    except:    
+        print("Cactust minion bug")
+        
+        #print(f'{i[0]} {i[1]} for {i[2]} {i[3]}   {cost} coins in total ({round(itemtotal.get(t.get(i[3]))[0])}*{round(int(i[2]))})')
+        
+f=open("minioncraftV2.txt","w")
+f.write(str(minions))    
+print(minions)
 ####################For now it just shows you all the minions and their prices
