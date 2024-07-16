@@ -36,11 +36,28 @@ def GetBazaarData(data):
         i+=1
     return itemtotal
 
-Bazaar=GetBazaarData()
-for i in minioncraft:
-    print(i)
-    #cost=0            
-    #x1=Bazaar.get(itemsList.get(i[3]))[0]
-    #x2=int(i[2])
-    #cost=round(x1*x2)     
+Bazaar=GetBazaarData(BazaarData)
+print(minioncraft)
+
+for iii in minioncraft:
+    i=0
+    for ii in minioncraft.get(iii):
+        try:
+            
+            print(iii,ii,)
+            
+                
+            if ii.get("2")!=None: ####For snow minion tier 1 of which cannot be crafted
+                if ii.get("2")[0]=="32":
+                    i+=1
+                           
+            i+=1
+            
+            cost=0    
+            minioncraftitem=ii.get(str(i))[1]       
+            x1=Bazaar.get(itemsList.get(minioncraftitem))[0]
+            x2=int(ii.get(str(i))[0] )
+            cost=round(x1*x2)  
+        except:
+            print('error')   
  
