@@ -39,40 +39,43 @@ def GetBazaarData(data):
     return itemtotal
 
 Bazaar=GetBazaarData(BazaarData)
-print(minioncraft)
-def GetMinionPrices():
+
+def GetMinionPrices(minion):
     costlist=[]
-    for iii in minioncraft:
-        i=0
-        for ii in minioncraft.get(iii):
-            try:
+    i=0
+    
+    for ii in minioncraft.get(minion):
+        try:
+            
+            
+            
                 
-                print(iii,ii,)
-                
-                    
-                if ii.get("2")!=None: ####For snow minion tier 1 of which cannot be crafted
-                    if ii.get("2")[0]=="32":
-                        i+=1
-                            
-                i+=1
-                
-                cost=0    
-                minioncraftitem=ii.get(str(i))[1]       
-                x1=Bazaar.get(itemsList.get(minioncraftitem))[0]
-                x2=int(ii.get(str(i))[0] )
-                cost=round(x1*x2)  
-                costlist.append(cost)
-            except:
-                print('error')  
-    return costlist 
+            if ii.get("2")!=None: ####For snow minion tier 1 of which cannot be crafted
+                if ii.get("2")[0]=="32":
+                    i+=1
+            print(ii)           
+            i+=1
+            
+            cost=0    
+            minioncraftitem=ii.get(str(i))[1]       
+            x1=Bazaar.get(itemsList.get(minioncraftitem))[0]
+            x2=int(ii.get(str(i))[0] )
+            cost=round(x1*x2)  
+            costlist.append([cost,minioncraftitem,ii.get(str(i))[0],i])
+        except:
+            return  "Error"
+    return costlist
 
 print("Welcome to minion crafts calculator. This app will show you what you need to craft minions and how much it will cost in coins")
 print("")
-while True:
-    for i in minioncraft:
-        print(i)
-    print()
-    choosedminion=input("Please,choose minion: ")
+
+for i in minioncraft:
+    print(i)
+print()
+choosedminion=input("Please,choose minion: ")
+
+for i in GetMinionPrices(choosedminion):
+    print(f"{choosedminion} tier {i[3]} for {i[2]} {i[1]} totaly worth {i[0]} coins")
     
 
  
