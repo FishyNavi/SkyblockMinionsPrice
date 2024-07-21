@@ -34,7 +34,7 @@ function displayMinionDetails(minionName, minionData) {
     img.src = `images/${minionName.replace("_"," ")}.png`; // Ensure image name matches the minion name
     img.alt = `${minionName} Image`;
     img.onerror = () => {
-        img.src = 'images/default.jpg'; // Fallback image if specific image not found
+        img.src = 'images/default.png'; // Fallback image if specific image not found
     };
     minionContainer.appendChild(img);
 
