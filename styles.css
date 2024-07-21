@@ -1,0 +1,114 @@
+/* General Body Styles */
+body {
+    margin: 0;
+    padding-top: 80px; /* Adjust this value according to the height of your banner */
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light background color */
+}
+
+/* Banner Styles */
+.banner {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff; /* Light banner color with more transparency */
+    padding: 20px 0; /* Increased padding for larger banner */
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); /* Add blur effect */
+    z-index: 1000;
+}
+
+/* Button Container Styles */
+.button-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    gap: 10px; /* Space between buttons */
+    margin-left: 20px; /* Space from the left edge of the banner */
+}
+
+/* Button Styles */
+.banner button {
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Light button color */
+    color: #000000; /* Black text */
+    margin: 0 10px;
+    padding: 10px 20px; /* Adjusted padding */
+    font-size: 16px;
+    font-family: 'Roboto', Arial, sans-serif; /* Use the Roboto font */
+    font-weight: 500; /* Medium weight for better visibility */
+    cursor: pointer;
+    border: none; /* No border */
+    transition: transform 0.3s ease; /* Add transition for smooth scaling */
+}
+
+.banner button:hover {
+    border-radius: 8px;
+    transform: scale(1.07); /* Scale button to 110% when hovered */
+}
+
+/* Heading Styles */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333; /* Darker text color */
+}
+
+/* Select Element Styles */
+.select-container {
+    text-align: center; /* Center the select box */
+    margin: 20px 0; /* Space around the select box */
+}
+
+select {
+    width: 200px; /* Adjust width as needed */
+    padding: 10px; /* Add padding for better spacing */
+    font-size: 16px; /* Font size to match the buttons */
+    font-family: 'Roboto', Arial, sans-serif; /* Font family for consistency */
+    border: 1px solid #ccc; /* Light border color */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #ffffff; /* White background for select dropdown */
+    color: #333; /* Dark text color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+/* Styles for dropdown arrow */
+select::-ms-expand {
+    display: none; /* Hide the default dropdown arrow in Internet Explorer */
+}
+
+select:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Minion Container Styles */
+.minion {
+    text-align: center; /* Centers the image and text within the container */
+    margin-bottom: 20px; /* Space below each minion container */
+}
+
+/* Minion Image Styles */
+.minion img {
+    width: 200px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    object-fit: cover; /* Ensures images cover the defined width and height without distortion */
+    border-radius: 8px; /* Adds rounded corners to images */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
+}
+
+/* Minion Details Styles */
+.minion-details {
+    background-color: #ffffff; /* Background color for minion details */
+    padding: 10px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
+    margin-top: 10px; /* Space between image and details */
+}
+
+.product {
+    margin-top: 10px; /* Space above each product block */
+}
