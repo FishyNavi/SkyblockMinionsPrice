@@ -115,6 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function getSelectedMinion() {
         const minionSelect = document.getElementById('minionSelect');
         const selectedMinion = minionSelect.value;
-        return selectedMinion ? minionData[selectedMinion] : null;
+        return selectedMinion ? minion_details[selectedMinion] : null;
     }
 });
