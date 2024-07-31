@@ -93,22 +93,49 @@ select:focus {
 
 /* Minion Image Styles */
 .minion img {
-    width: 200px; /* Fixed width */
-    height: 200px; /* Fixed height */
-    object-fit: cover; /* Ensures images cover the defined width and height without distortion */
-    border-radius: 8px; /* Adds rounded corners to images */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
+    width: 100px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
 }
 
-/* Minion Details Styles */
-.minion-details {
-    background-color: #ffffff; /* Background color for minion details */
+/* Error Container Styles */
+#errorContainer {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Hours AFK Container Styles */
+.hoursAFK-container {
+    text-align: center; /* Center the input box and label */
+    margin: 20px 0; /* Space around the input box */
+}
+
+.hoursAFK-container label {
+    margin-right: 10px; /* Space between label and input box */
+}
+
+.hoursAFK-container input {
+    padding: 5px;
+    font-size: 16px; /* Match font size with other inputs */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
     padding: 10px;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
-    margin-top: 10px; /* Space between image and details */
+    border: 1px solid #ddd;
+    text-align: center;
 }
 
-.product {
-    margin-top: 10px; /* Space above each product block */
+th {
+    background-color: #f4f4f4;
 }

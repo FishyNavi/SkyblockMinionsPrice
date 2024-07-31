@@ -1,13 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Function to fetch minion data from an external file
-    fetch('minionData.json')
-        .then(response => response.json())
+    function displayErrorMessage(message) {
+        const errorContainer = document.getElementById('errorContainer');
+        errorContainer.textContent = message;
+        errorContainer.style.display = 'block'; // Show the error container
+    }
+
+    // Fetch minion data from minion_details.json
+    fetch('minion_details.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
+            displayErrorMessage(''); // Clear any previous error messages
             populateMinionDropdown(data);
         })
-        .catch(error => console.error('Error fetching minion data:', error));
+        .catch(error => displayErrorMessage('Error fetching minion data: ' + error.message));
 
-    // Function to populate the minion dropdown
+    // Populate the minion dropdown
     function populateMinionDropdown(data) {
         const minionSelect = document.getElementById('minionSelect');
         for (const minion in data) {
@@ -17,23 +29,27 @@ document.addEventListener('DOMContentLoaded', function () {
             minionSelect.appendChild(option);
         }
 
-        // Event listener for dropdown change
         minionSelect.addEventListener('change', function () {
             const selectedMinion = this.value;
-            displayMinionDetails(data[selectedMinion]);
+            if (selectedMinion) {
+                displayMinionDetails(data[selectedMinion]);
+            } else {
+                document.getElementById('minionDetails').innerHTML = '';
+            }
         });
     }
 
-    // Function to display minion details
     function displayMinionDetails(minion) {
         const minionDetails = document.getElementById('minionDetails');
         minionDetails.innerHTML = ''; // Clear previous details
 
-        // Create a table for the details
         const table = document.createElement('table');
 
         // Create table headers
-        const headers = ['Tier', 'Delay (s)', 'Storage'];
+        const headers = ['Tier'];
+        minion.products.forEach(product => {
+            headers.push(product.item);
+        });
         const headerRow = document.createElement('tr');
         headers.forEach(headerText => {
             const th = document.createElement('th');
@@ -42,32 +58,63 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         table.appendChild(headerRow);
 
-        // Populate table with minion details
-        for (let i = 0; i < minion.tierDelay.length; i++) {
+        // Populate table rows
+        for (let i = 0; i < 11; i++) {
             const row = document.createElement('tr');
             row.id = `row-${i}`;
             row.className = 'minion-row';
 
             const tierCell = document.createElement('td');
             tierCell.className = 'minion-cell';
-            tierCell.textContent = i + 1;
-
-            const delayCell = document.createElement('td');
-            delayCell.className = 'minion-cell';
-            delayCell.textContent = minion.tierDelay[i];
-
-            const storageCell = document.createElement('td');
-            storageCell.className = 'minion-cell';
-            storageCell.textContent = minion.storage[i];
-
+            tierCell.textContent = `Tier ${i + 1}`;
             row.appendChild(tierCell);
-            row.appendChild(delayCell);
-            row.appendChild(storageCell);
+
+            minion.products.forEach(product => {
+                const amountCell = document.createElement('td');
+                amountCell.className = 'minion-cell';
+                amountCell.textContent = '0'; // Placeholder, will be updated on input
+                row.appendChild(amountCell);
+            });
 
             table.appendChild(row);
         }
 
-        // Append the table to the minionDetails div
         minionDetails.appendChild(table);
+
+        // Set default hours value
+        const hoursInput = document.getElementById('hoursAFK');
+        hoursInput.value = 1; // Set default value to 1
+        updateGeneratedAmounts(1); // Initialize with default value
+
+        // Event listener for hours input
+        hoursInput.addEventListener('input', function () {
+            const hours = parseFloat(this.value) || 1; // Default to 1 if invalid
+            updateGeneratedAmounts(hours);
+        });
+    }
+
+    function updateGeneratedAmounts(hours) {
+        const minion = getSelectedMinion(); // Get selected minion data
+        if (!minion) return;
+
+        const rows = document.querySelectorAll('#minionDetails .minion-row');
+        rows.forEach((row, i) => {
+            minion.products.forEach((product, index) => {
+                const delay = minion.tierDelay[i]; // Get delay for the tier
+                if (delay && product.perTime !== null) {
+                    const itemsPerHour = (3600 / delay) * product.perTime;
+                    
+                    row.querySelectorAll('td')[index + 1].textContent = Math.floor(itemsPerHour * hours);
+                } else {
+                    row.querySelectorAll('td')[index + 1].textContent = 'N/A'; // Handle cases with no delay or perTime
+                }
+            });
+        });
+    }
+
+    function getSelectedMinion() {
+        const minionSelect = document.getElementById('minionSelect');
+        const selectedMinion = minionSelect.value;
+        return selectedMinion ? minionData[selectedMinion] : null;
     }
 });
